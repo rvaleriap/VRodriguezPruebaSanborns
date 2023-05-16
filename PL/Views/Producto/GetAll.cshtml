@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewData["Title"] = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container">
+    <div class="row">
+        <h2> Productos</h2>
+    </div>
+    <hr />
+    <div class="row">
+        <div style="float:right">
+
+            @Html.ActionLink("Agrega Producto", "Form", "Producto", htmlAttributes: new { @class = "btn btn-success" })
+        </div>
+    </div>
+    <div class="row">
+        @if (Model.Productos != null)
+        {
+            //tabla
+            <table class="table table.borderes table.responsive">
+                <thead>
+                    <tr>
+                        <td class="text-center" style=" font-weight:bold;">Descripcion</td>
+                        <td class="text-center" style=" font-weight:bold;">PrecioVenta</td>
+                        <td class="text-center" style=" font-weight:bold;"> Descuento</td>
+                        <td class="text-center" style=" font-weight:bold;"> Impuesto</td>
+                        <td class="text-center" style=" font-weight:bold;">Nombre de Division</td>
+                        <td class="text-center" style=" font-weight:bold;">Editar</td>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ML.Producto producto in Model.Productos)
+                    {
+                        <tr>
+                           
+                           
+                            <td>@producto.Descripcion</td>
+                            <td>@producto.PrecioVenta</td>
+                            <td>@producto.Descuento</td>
+                            <td>@producto.Impuesto</td>
+                            <td>@producto.Descripcion</td>
+                           <td class="text-center"><a class="btn btn-warning" href="@Url.Action("Form", "Producto", new { Sku = producto.Sku})">  </a></td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="alert alert-danger" role="alert">Ocurrio un error al realizar la consulta </div>
+        }
+    </div>
+</div>
